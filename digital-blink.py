@@ -5,9 +5,9 @@ rg.setmode(rg.BCM)
 led = 26
 rg.setup(led, rg.OUT)
 state = 0
-pt = 6
-rg.setup(pt, rg.IN)
-
+period = 1.0
 
 while True:
-    rg.output(led, int(not(rg.input(pt))))
+    rg.output(led, state)
+    state = int(not(bool(state)))
+    time.sleep(period)
