@@ -22,10 +22,10 @@ class r2r_dac:
     
     def voltage_to_number(self, v):
         if not(0.0 <= v <= self.dac_range):
-            print(f"Что-то мы перенапряглись, явно сильнее чем {dac_range:.2f} В")
+            print(f"Что-то мы перенапряглись, явно сильнее чем {self.dac_range:.2f} В")
             print("Пора разрядить обстановочку")
-            return dac.number_to_dac(0)
-        return dac.number_to_dac(int(v / self.dac_range * 255))
+            return self.number_to_dac(0)
+        return self.number_to_dac(int(v / self.dac_range * 255))
     
 if __name__ == "__main__":
     try:
