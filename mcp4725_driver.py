@@ -20,12 +20,15 @@ class MCP4725:
         if not isinstance(number, int):
             print("На вход ЦАП можно подавать только целые числа")
             print(number)
+            return
         
         if not (0 <= number <= 4095):
-         print("Чмсло выходит за разрядность MCP4752 (12 бит)")
+            print("Чмсло выходит за разрядность MCP4752 (12 бит)")
+            return
         
         first_byte = self.wm | self.pds | number >> 8
         second_byte = number & 0xFF
+        
         self.bus.write_byte_data(0x61, first_byte, second_byte)
         
         if self.verbose:
@@ -36,7 +39,7 @@ class MCP4725:
             print("Напряжение не долнжно выходить за границы")
         else:
             dac_value = min(int((voltage / self.dynamic_range) * 4095), 4095)
-            dac.set_number(int(dac_value))
+            self.set_number(int(dac_value))
            
 if __name__ == "__main__":
     
